@@ -40,6 +40,16 @@ public class RedisUCloud {
 		}
 	}
 
+	public void set(String key, String value) {
+		Jedis jedis = null;
+		try {
+			jedis = getJedis();
+			jedis.set(key, value);
+		} finally {
+			release(jedis);
+		}
+	}
+
 	public String get(String key) {
 		Jedis jedis = getJedis();
 		String value = null;
@@ -48,5 +58,11 @@ public class RedisUCloud {
 			release(jedis);
 		}
 		return value;
+	}
+
+	public static void main(String[] args) {
+		RedisUCloud redis = new RedisUCloud();
+		redis.set("kradio_group_qrcode_url", "http://img.kaolafm.net/kradio/kradio-wx-group.jpg");
+		System.out.println(redis.get("kradio_group_qrcode_url"));
 	}
 }
