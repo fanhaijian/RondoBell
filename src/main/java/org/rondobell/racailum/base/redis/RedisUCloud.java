@@ -62,7 +62,7 @@ public class RedisUCloud {
 
 	public static void main(String[] args) {
 		RedisUCloud redis = new RedisUCloud();
-		redis.set("kradio_group_qrcode_url", "http://img.kaolafm.net/kradio/kradio-wx-group.jpg");
+		//redis.set("kradio_group_qrcode_url", "http://img.kaolafm.net/kradio/kradio-wx-group.jpg");
 		System.out.println(redis.get("kradio_group_qrcode_url"));
 	}
 }

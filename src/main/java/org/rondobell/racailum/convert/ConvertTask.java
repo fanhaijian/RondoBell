@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ConvertTask implements Runnable{
 
-	static Long startId = 1000025832654L;
+	static Long startId = 1000008023857L;
 
 	String server;
 	int id;
@@ -41,10 +41,10 @@ public class ConvertTask implements Runnable{
 		List<String> serverList = new ArrayList<>();
 		serverList.add("http://10.8.1.6:8080,12");
 		serverList.add("http://10.8.1.8:8080,12");
-		serverList.add("http://10.8.1.9:8080,6");
-		serverList.add("http://10.8.1.10:8081,10");
-		serverList.add("http://10.8.1.58:8081,10");
-		serverList.add("http://10.8.1.3:8080,10");
+		//serverList.add("http://10.8.1.9:8080,6");
+		//serverList.add("http://10.8.1.10:8081,9");
+		serverList.add("http://10.8.1.58:8081,9");
+		serverList.add("http://10.8.1.3:8080,9");
 
 		for (String serverInfo:serverList){
 			String server = serverInfo.split(",")[0];
@@ -68,26 +68,39 @@ public class ConvertTask implements Runnable{
 		HttpClient httpClient = new HttpClient();
 		List<ConvertInfo> convertInfoList = new ArrayList<>();
 
+		SimpleDateFormat formator = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
 		while (true) {
 			synchronized (ConvertTask.class){
 				SqlSession session = SqlSessionFactoryHolder.getSession();
-				MzMapper mapper = session.getMapper(MzMapper.class);
-				convertInfoList = mapper.queryAudioConvertInfo(startId, 1);
-				if (convertInfoList.size()>0) {
-					startId = convertInfoList.get(0).getAudioId();
+				try {
+					MzMapper mapper = session.getMapper(MzMapper.class);
+					convertInfoList = mapper.queryAudioConvertInfo(startId, 1);
+					if (convertInfoList.size()>0) {
+						startId = convertInfoList.get(0).getAudioId();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					session.close();
 				}
-				session.close();
 			}
 			if(convertInfoList.size()==0){
 				System.out.println(server+" "+id+"   finish");
 				break;
 			}else{
-				ConvertInfo info = convertInfoList.get(0);
-				System.out.println(server+" "+id+" "+info.getAudioId()+" "+info.getFilePath());
-				String result = httpClient.get(server+"/kaola-new-audioConvert/old/sync_convert?" +
-						"audioId="+info.getAudioId()+"&catalogId="+info.getCatalogId()+"&filePath="+info.getFilePath());
+				try {
+					ConvertInfo info = convertInfoList.get(0);
+					System.out.println(formator.format(new Date())+" "+server+" "+id+" "+info.getAudioId()+" "+info.getFilePath());
+					long start = System.currentTimeMillis();
+					String result = httpClient.get(server+"/kaola-new-audioConvert/old/sync_convert?" +
+							"audioId="+info.getAudioId()+"&catalogId="+info.getCatalogId()+"&filePath="+info.getFilePath());
 
-				System.out.println(server+" "+id+" "+info.getAudioId()+" "+result);
+					long end = System.currentTimeMillis();
+					System.out.println(formator.format(new Date())+" "+server+" "+id+" "+info.getAudioId()+" "+(end- start)+" "+result);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 
 			}
 		}
