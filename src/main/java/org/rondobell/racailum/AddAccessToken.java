@@ -5,15 +5,18 @@ import org.rondobell.racailum.base.dto.OAuth2Token;
 import org.rondobell.racailum.base.redis.RedisUCloud;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
 public class AddAccessToken {
-    static String appId = "hk8185";
+    static String appId = "nq4283";
     public static void main(String[] args) throws IOException {
-        BufferedReader in = new BufferedReader(new FileReader("test.log"));
+        String file = "D:\\"+appId+".txt";
+        if(args.length>1){
+            file = args[0];
+        }
+        BufferedReader in = new BufferedReader(new FileReader(file));
         String str;
         List<String> list = new ArrayList<>();
         while ((str = in.readLine()) != null) {
@@ -45,8 +48,10 @@ public class AddAccessToken {
             oauth2.setRefreshToken(refresh);
             oauth2.setAccessToken(token);
 
-            redis.setSerializeProtoStuff("o2:t:"+token, oauth2, 60*60*2);
-            redis.setSerializeProtoStuff("o2:ft:"+ refresh, oauth2, 60*60*24*30);
+            redis.setSerializeProtoStuff("o2:t:"+token.getValue(), oauth2, 60*60*2);
+            redis.setSerializeProtoStuff("o2:ft:"+ refresh.getValue(), oauth2, 60*60*24*30);
+
+            System.out.println(id+", access_token: "+token.getValue()+", refresh_token: "+refresh.getValue());
 
         }
     }
