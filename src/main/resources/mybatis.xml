@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <properties>
-        <property name="jdbc.media.url" value="jdbc:mysql://10.7.1.241:3306?useUnicode=true&amp;characterEncoding=utf-8&amp;generateSimpleParameterMetadata=true&amp;autoReconnect=true"/>
+        <property name="jdbc.media.url" value="jdbc:mysql://10.51.12.86:3306?useUnicode=true&amp;characterEncoding=utf-8&amp;generateSimpleParameterMetadata=true&amp;autoReconnect=true"/>
         <property name="jdbc.media.username" value="itings"/>
         <property name="jdbc.media.password" value="itingspwd"/>
     </properties>
@@ -12,7 +12,7 @@
             <transactionManager type="JDBC"/>
             <dataSource type="org.rondobell.racailum.base.dao.HikariDataSourceFactoryForMybatis">
                 <property name="poolName" value="slave"/>
-                <property name="jdbcUrl" value="jdbc:mysql://10.7.1.241:3306?useUnicode=true&amp;characterEncoding=utf-8&amp;generateSimpleParameterMetadata=true&amp;autoReconnect=true"/>
+                <property name="jdbcUrl" value="jdbc:mysql://10.51.12.86:3306?useUnicode=true&amp;characterEncoding=utf-8&amp;generateSimpleParameterMetadata=true&amp;autoReconnect=true"/>
                 <property name="username" value="itings"/>
                 <property name="password" value="itingspwd"/>
                 <property name="maximumPoolSize" value="20"/>

@@ -2,6 +2,7 @@ package org.rondobell.racailum.base.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.rondobell.racailum.base.dto.BroadcastAdditionDto;
 import org.rondobell.racailum.base.dto.ConvertInfo;
 
@@ -27,4 +28,7 @@ public interface MzMapper {
 
 	@Select("select id from media_resources.tb_broadcast")
 	List<Long> queryBroadcastId();
+
+	@Update("update user.user_info set nickname='云听',un_nickname='云听',check_nickname='云听',level=3 where id=685459 and uid=15798 ")
+    void simpleUpdate();
 }
