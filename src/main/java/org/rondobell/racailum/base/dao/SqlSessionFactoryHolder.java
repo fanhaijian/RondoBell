@@ -35,7 +35,7 @@ public class SqlSessionFactoryHolder {
 
 	//创建能执行映射文件中sql的sqlSession
 	public static SqlSession getSession() {
-		return sessionFactory.openSession();
+		return sessionFactory.openSession(true);
 	}
 	
 	public static void main (String[] args) {

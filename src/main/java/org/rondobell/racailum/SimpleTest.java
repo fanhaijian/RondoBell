@@ -20,7 +20,7 @@ public class SimpleTest {
 	public static void main(String[] args) throws IOException {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 
-		String albumId = "1568898586339";
+		String albumId = "15998281188230";
 		HttpPost httpPost = new HttpPost("http://esopendyn.radio.cn/appstk8k/dyn5105f815be0318f9/5f5c518bf9eaa940e2535a27671eaf2f");
 
 		long time = System.currentTimeMillis()/1000;

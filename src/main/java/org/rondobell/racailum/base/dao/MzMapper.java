@@ -1,5 +1,6 @@
 package org.rondobell.racailum.base.dao;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -29,6 +30,9 @@ public interface MzMapper {
 	@Select("select id from media_resources.tb_broadcast")
 	List<Long> queryBroadcastId();
 
-	@Update("update user.user_info set nickname='云听',un_nickname='云听',check_nickname='云听',level=3 where id=685459 and uid=15798 ")
-    void simpleUpdate();
+	@Update("update media_resources.tb_album set status=0,lastvalid_startdate=null where id=#{albumId}")
+    void simpleUpdate(Long albumId);
+
+	@Insert("insert into user.user (uid,username,password,type,create_time,update_time,status) values (15798,'yunting@cnr.cn','504fa9d2a49a1c48c6faef5830cd0cfb',5,1474948890975,1474948890975,0)")
+	void simpleInsert();
 }
