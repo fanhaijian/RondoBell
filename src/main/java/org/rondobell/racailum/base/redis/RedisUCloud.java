@@ -20,9 +20,29 @@ public class RedisUCloud {
 
 	public static void main(String[] args) {
 		RedisUCloud redis = new RedisUCloud();
-		//redis.set("kradio_group_qrcode_url", "http://img.kaolafm.net/kradio/kradio-wx-group.jpg");
-		//System.out.println(redis.get("kradio_group_qrcode_url"));
-		redis.ScanKeys("o2:ft:");
+		redis.set("kradio_group_qrcode_url", "http://img.kaolafm.net/kradio/kradio-wx-group.jpg");
+		System.out.println(redis.get("kradio_group_qrcode_url"));
+		//System.out.println(redis.get("token3163573"));
+	}
+
+	public Long hset(String key, String field, String value) {
+		Jedis jedis = null;
+		try {
+			jedis = getJedis();
+			return jedis.hset(key, field, value);
+		} finally {
+			release(jedis);
+		}
+	}
+
+	public String hget(String key, String field) {
+		Jedis jedis = null;
+		try {
+			jedis = getJedis();
+			return jedis.hget(key, field);
+		} finally {
+			release(jedis);
+		}
 	}
 
 
