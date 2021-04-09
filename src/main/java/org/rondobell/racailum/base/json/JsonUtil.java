@@ -14,6 +14,7 @@ public class JsonUtil {
 		mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
 		mapper.configure(DeserializationConfig.Feature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
 		mapper.configure(JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS, true);
+
 	}
 
 	public static <T> String toJsonString(T t) {

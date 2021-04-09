@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ConvertTask implements Runnable{
 
-	static Long startId = 1000026311810L;
+	static Long startId = 1000026296476L;
 
 	String server;
 	int id;
@@ -39,8 +39,8 @@ public class ConvertTask implements Runnable{
 
 
 		List<String> serverList = new ArrayList<>();
-		serverList.add("http://10.51.151.117:8084,4");
-		//serverList.add("http://10.51.151.119:8080,4");
+		//serverList.add("http://10.51.151.117:8084,4");
+		serverList.add("http://10.51.151.119:8080,3");
 		//serverList.add("http://10.51.151.126:8081,4");
 		serverList.add("http://10.51.151.120:8081,4");
 		serverList.add("http://10.51.151.135:8080,6");
