@@ -19,9 +19,11 @@ public class RedisUCloud {
 	private ConcurrentHashMap<Class<?>, SpinStatus> raceUtil = null;
 
 	public static void main(String[] args) {
+		String key = "key_wechat_ticket";
 		RedisUCloud redis = new RedisUCloud();
-		redis.set("kradio_group_qrcode_url", "http://img.kaolafm.net/kradio/kradio-wx-group.jpg");
-		System.out.println(redis.get("kradio_group_qrcode_url"));
+		//redis.set("v1:top:album657", "1100000000078,1100002118072,1100000000012,1100002151369,1100002151292");
+		System.out.println(redis.get(key));
+		System.out.println(redis.del(key));
 		//System.out.println(redis.get("token3163573"));
 	}
 
@@ -99,6 +101,16 @@ public class RedisUCloud {
 		String value = null;
 		if (jedis != null) {
 			value = jedis.get(key);
+			release(jedis);
+		}
+		return value;
+	}
+
+	public Long del(String key) {
+		Jedis jedis = getJedis();
+		Long value = null;
+		if (jedis != null) {
+			value = jedis.del(key);
 			release(jedis);
 		}
 		return value;

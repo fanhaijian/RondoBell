@@ -67,9 +67,9 @@ public class FakeSSLClient extends DefaultHttpClient {
             List<NameValuePair> list = new ArrayList<NameValuePair>();
             Map<String, String> map = new HashMap<>();
             map.put("pageNo", "1");
-            map.put("pageSize", "100");
+            map.put("pageSize", "200");
             String cName = "";
-            String cType = "03";
+            String cType = "04";
             if(cType.equals("03")){
                 cName = "在职单客户";
             }
@@ -92,7 +92,7 @@ public class FakeSSLClient extends DefaultHttpClient {
 
 
             //String cvalue = "";
-            String cvalue = "pssPssp-prdDmz-StickySessionRule=375763794; BIGipServerPOOL_PACLOUD_PRDR2016050607913=2853478103.16415.0000; loginFrom=portal; WLS_HTTP_BRIDGE_PSS_PSSP=iSnBSP2BUlTCFbDNeNQTN3tUZUXy4Xj_UK-_P20Q9o7NGj9bxZcn!-1321431421; PORTALSESSION=61fe6a8aca05007b6f59bcd880cb9f826efdde52e8aca0bb0e7fed3856279743c82f96b3afba9c7f359ac3b8ac3da0f5cbe31cae8d8ac306ccf4a2a8356aa9cf0fa8018147546a2b6f003c3e7476dfdc76aa2e6e71738da167bbceed37c77cf867434b4e102b625b292b14eebf0ded05; PASESSION=61fe6a8aca05007b6f59bcd880cb9f826efdde52e8aca0bb0e7fed3856279743c82f96b3afba9c7f359ac3b8ac3da0f5cbe31cae8d8ac306ccf4a2a8356aa9cf0fa8018147546a2b6f003c3e7476dfdc76aa2e6e71738da167bbceed37c77cf867434b4e102b625b292b14eebf0ded05";
+            String cvalue = "loginFrom=portal; pssPssp-prdDmz-StickySessionRule=-511739887; WLS_HTTP_BRIDGE_PSS_PSSP=El_F9WjBDFPw5nC6KwMLi4rfj0IHQvKweNisL5W6EeFD3v4b8NcM!-1332695077; BIGipServerPOOL_PACLOUD_PRDR2016050607913=2803146455.16415.0000; PORTALSESSION=61fe6a8aca05007b6f59bcd880cb9f8221feee475ae012f0a10b4aa301ff597c26333aa807b3ec6b3347a022e83734b8e12862e43c2307426a24ebfcc394ff9988d88cabf18f57ea520a070b9b8d8835cd5ee7007fd8a8f39c6b7dc91817a7fe757499171b8c3abe0974a6b4f8029ff6; PASESSION=61fe6a8aca05007b6f59bcd880cb9f8221feee475ae012f0a10b4aa301ff597c26333aa807b3ec6b3347a022e83734b8e12862e43c2307426a24ebfcc394ff9988d88cabf18f57ea520a070b9b8d8835cd5ee7007fd8a8f39c6b7dc91817a7fe757499171b8c3abe0974a6b4f8029ff6";
             httpPost.setHeader("cookie", cvalue);
             httpPost.setHeader("origin", "https://pssp.pa18.com");
             httpPost.setHeader("referer", "https://pssp.pa18.com/clientCenter.loadSearchClientView.do");
@@ -111,7 +111,8 @@ public class FakeSSLClient extends DefaultHttpClient {
                     List<Element> elements = table.child(0).children();
                     elements.remove(0);
                     StringBuffer sb = new StringBuffer();
-                    sb.append("<html><head><style media=print>.page {\n" +
+                    sb.append("<html><head><style>table { border-collapse: collapse;}\n" +
+                            " tr td { border:1px solid black;}</style><style media=print>.page {\n" +
                             " page-break-after: always;}</style></head><body>");
                     //sb.append("<span>"+cName+"</span>");
                     int i = 0;
@@ -126,9 +127,10 @@ public class FakeSSLClient extends DefaultHttpClient {
                         sb.append(oneCustom);
                         i++;
                         if(i>1) {
-                            break;
+                            //break;
                         }
                         sb.append("<div class=\"page\"></div>");
+                        Thread.sleep(777);
                     }
                     sb.append("</body></html>");
                     String outName = "D:\\pinganc"+cName+".html";
@@ -246,7 +248,7 @@ public class FakeSSLClient extends DefaultHttpClient {
                     System.out.println(json);
                     JSONObject jsonObject1 = JSONObject.parseObject(json);
                     StringBuffer bf = new StringBuffer();
-                    bf.append("<table border=\"1\" style=\"font-size:14px\"><tr>");
+                    bf.append("<table style=\"font-size:14px\"><tr>");
                     bf.append("<td>姓名</td><td>").append(jsonObject1.getString("clientName")).append("</td>");
                     bf.append("<td>性别</td><td>").append("m".equalsIgnoreCase(jsonObject1.getString("clientSex"))?"男":"女").append("</td>");
                     bf.append("<td>身份证号</td><td>").append(jsonObject1.getString("idNo")).append("</td>");
@@ -266,7 +268,7 @@ public class FakeSSLClient extends DefaultHttpClient {
                     bf.append("<td>工作单位</td><td colspan=\"15\">").append(jsonObject1.getString("companyName")).append("</td></tr></table>");
 
                     String space = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-                    bf.append("<br><table border=\"1\" style=\"font-size:14px\"><tr><td>信用卡</td><td>财险</td><td>养老</td><td>寿险</td><td>健康险</td><td>证券</td><td>银行</td><td>基金</td><td>信托</td></tr><tr>");
+                    bf.append("<br><table style=\"font-size:14px\"><tr><td>信用卡</td><td>财险</td><td>养老</td><td>寿险</td><td>健康险</td><td>证券</td><td>银行</td><td>基金</td><td>信托</td></tr><tr>");
                     bf.append("<td>").append("1".equalsIgnoreCase(jsonObject1.getString("isBuyCard"))?"有"+space:"无"+space).append("</td>");
                     bf.append("<td>").append("1".equalsIgnoreCase(jsonObject1.getString("isBuyProperty"))?"有"+space:"无"+space).append("</td>");
                     bf.append("<td>").append("1".equalsIgnoreCase(jsonObject1.getString("isBuyPension"))?"有"+space:"无"+space).append("</td>");
@@ -328,7 +330,7 @@ public class FakeSSLClient extends DefaultHttpClient {
                     JSONObject jsonObject1 = JSONObject.parseObject(result);
                     JSONArray array = jsonObject1.getJSONObject("data").getJSONArray("allPolInfo");
                     StringBuffer sb = new StringBuffer();
-                    sb.append("<br><table border=\"1\" style=\"font-size:12px\"><tr>");
+                    sb.append("<br><table style=\"font-size:12px\"><tr>");
                     sb.append("<td>单号</td>");
                     sb.append("<td>投保人</td>");
                     sb.append("<td>投保日期</td>");
