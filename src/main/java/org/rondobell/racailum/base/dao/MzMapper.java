@@ -29,6 +29,9 @@ public interface MzMapper {
 	@Select("select id from media_resources.tb_broadcast")
 	List<Long> queryBroadcastId();
 
-	@Update("update media_resources.tb_broadcast set province_id=230000,provinceCity_id=230100 where id = 1600000000524")
+	@Update("delete from media_resources.tb_album where id in (1100002156670,1100002156671,1100002156675,1100002156676,1100002156678,1100002156683)")
     void simpleUpdate();
+
+	@Update("delete from media_resources.tb_album_application_scope where album_id in (1100002156670,1100002156671,1100002156675,1100002156676,1100002156678,1100002156683)")
+	void simpleUpdate2();
 }

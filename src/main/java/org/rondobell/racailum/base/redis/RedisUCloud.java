@@ -19,11 +19,14 @@ public class RedisUCloud {
 	private ConcurrentHashMap<Class<?>, SpinStatus> raceUtil = null;
 
 	public static void main(String[] args) {
-		String key = "key_wechat_ticket";
+		//String key = "key_wechat_ticket";
+		String key = "ytgrv1:sl";
 		RedisUCloud redis = new RedisUCloud();
 		//redis.set("v1:top:album657", "1100000000078,1100002118072,1100000000012,1100002151369,1100002151292");
 		System.out.println(redis.get(key));
-		System.out.println(redis.del(key));
+		System.out.println(redis.set(key, args[0]));
+		System.out.println(redis.get(key));
+
 		//System.out.println(redis.get("token3163573"));
 	}
 
@@ -86,11 +89,11 @@ public class RedisUCloud {
 		}
 	}
 
-	public void set(String key, String value) {
+	public String set(String key, String value) {
 		Jedis jedis = null;
 		try {
 			jedis = getJedis();
-			jedis.set(key, value);
+			return jedis.set(key, value);
 		} finally {
 			release(jedis);
 		}

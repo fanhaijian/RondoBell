@@ -10,9 +10,13 @@ public class DBTest {
         MzMapper mapper = session.getMapper(MzMapper.class);
 
         mapper.simpleUpdate();
-
         session.close();
 
+
+        session = SqlSessionFactoryHolder.getSession();
+        mapper = session.getMapper(MzMapper.class);
+        mapper.simpleUpdate2();
+        session.close();
 
     }
 }
