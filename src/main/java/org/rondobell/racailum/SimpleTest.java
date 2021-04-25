@@ -1,6 +1,8 @@
 package org.rondobell.racailum;
 
 import java.io.File;
+import java.util.Calendar;
+import java.util.Date;
 
 public class SimpleTest {
 	public static void main(String[] args) {
@@ -10,12 +12,8 @@ public class SimpleTest {
 //			url = "http://"+ url.replaceFirst(":[1-9]+[0-9]*/|/",":443/");
 //		}
 //		System.out.println(url);
-		if (args.length==0) {
-			File file = new File("/usr/local/task/test");
-			file.mkdirs();
-		}else{
-			File file = new File("/usr/local/task/test/");
-			file.mkdirs();
-		}
+		Calendar cal = Calendar.getInstance();
+		cal.set(2021,3,23,14,10,0);
+		System.out.println(cal.getTime());
 	}
 }

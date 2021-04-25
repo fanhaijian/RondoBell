@@ -34,4 +34,13 @@ public interface MzMapper {
 
 	@Update("delete from media_resources.tb_album_application_scope where album_id in (1100002156670,1100002156671,1100002156675,1100002156676,1100002156678,1100002156683)")
 	void simpleUpdate2();
+
+	@Select("SELECT count(id) FROM media_resources.tb_album_audio WHERE STATUS = 2 AND album_id = #{albumId}  AND valid_startdate BETWEEN '2021-04-24 00:00:00' AND '2021-04-25 00:00:00' ")
+	Integer conutUpdateYes(Long albumId);
+
+	@Select("SELECT count(id) FROM media_resources.tb_album_audio WHERE STATUS = 2 AND album_id = #{albumId}")
+	Integer conutUpdateAll(Long albumId);
+
+	@Select("select name from media_resources.tb_catalog where id = #{cat}")
+	String getCatName(Integer cat);
 }

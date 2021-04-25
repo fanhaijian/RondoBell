@@ -50,6 +50,16 @@ public class RedisUCloud {
 		}
 	}
 
+	public String info() {
+		Jedis jedis = null;
+		try {
+			jedis = getJedis();
+			return jedis.info();
+		} finally {
+			release(jedis);
+		}
+	}
+
 
 	private static class SpinStatus {
 		volatile boolean released;

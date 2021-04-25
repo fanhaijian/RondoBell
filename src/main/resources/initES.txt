@@ -1,0 +1,13 @@
+nohup java -cp ./*.jar com.kaolafm.data.synchronize.task.InitAlbumIndexTask &
+nohup java -cp ./*.jar com.kaolafm.data.synchronize.task.InitAudioIndexTask &
+nohup java -cp ./*.jar com.kaolafm.data.synchronize.task.InitUserIndexTask &
+java -cp ./*.jar com.kaolafm.data.synchronize.task.InitColumnToOperationIndexTask
+java -cp ./*.jar com.kaolafm.data.synchronize.task.InitCatalogIndexTask
+java -cp ./*.jar com.kaolafm.data.synchronize.task.InitAdvertIndexTask
+java -cp ./*.jar com.kaolafm.data.synchronize.task.InitAppIndexTask
+java -cp ./*.jar com.kaolafm.data.synchronize.task.InitDeviceIndexTask
+java -cp ./*.jar com.kaolafm.data.synchronize.task.InitModelIndexTask
+java -cp ./*.jar com.kaolafm.data.synchronize.task.InitRiskIndexTask
+java -cp ./*.jar com.kaolafm.data.synchronize.task.InitWhitelistIndexTask
+java -cp ./*.jar com.kaolafm.data.synchronize.task.InitOperateIndexTask
+
