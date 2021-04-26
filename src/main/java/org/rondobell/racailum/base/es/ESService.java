@@ -1,7 +1,5 @@
 package org.rondobell.racailum.base.es;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.ContentType;
@@ -10,17 +8,10 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.TransportAddress;
-import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.rondobell.racailum.base.io.FileUtil;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,7 +19,9 @@ import java.util.Date;
 public class ESService {
 
 	static TransportClient client;
-	static String esHost = "n1.es.kaolat.cn";
+	static String esHost = "10.51.151.153";
+	//static String esHost = "n1.es.kaolat.cn";
+
 
 	/*static {
 		try {
