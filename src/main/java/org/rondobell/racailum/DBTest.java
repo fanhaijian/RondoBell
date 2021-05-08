@@ -9,14 +9,15 @@ public class DBTest {
         SqlSession session = SqlSessionFactoryHolder.getSession();
         MzMapper mapper = session.getMapper(MzMapper.class);
 
-        mapper.simpleUpdate();
+        int count = mapper.simpleUpdate();
+        System.out.println("update count "+count);
         session.close();
 
 
-        session = SqlSessionFactoryHolder.getSession();
+        /*session = SqlSessionFactoryHolder.getSession();
         mapper = session.getMapper(MzMapper.class);
         mapper.simpleUpdate2();
-        session.close();
+        session.close();*/
 
     }
 }

@@ -29,13 +29,13 @@ public interface MzMapper {
 	@Select("select id from media_resources.tb_broadcast")
 	List<Long> queryBroadcastId();
 
-	@Update("delete from media_resources.tb_album where id in (1100002156670,1100002156671,1100002156675,1100002156676,1100002156678,1100002156683)")
-    void simpleUpdate();
+	@Update("update media_resources.tb_album_audio set status=5  where album_id = 1100002156558 and create_date between '2021-05-01 13:00:00' and '2021-05-05 14:33:00'")
+    int simpleUpdate();
 
-	@Update("delete from media_resources.tb_album_application_scope where album_id in (1100002156670,1100002156671,1100002156675,1100002156676,1100002156678,1100002156683)")
+	@Update(" from media_resources.tb_album_application_scope where album_id in (1100002156670,1100002156671,1100002156675,1100002156676,1100002156678,1100002156683)")
 	void simpleUpdate2();
 
-	@Select("SELECT count(id) FROM media_resources.tb_album_audio WHERE STATUS = 2 AND album_id = #{albumId}  AND valid_startdate BETWEEN '2021-04-24 00:00:00' AND '2021-04-25 00:00:00' ")
+	@Select("SELECT count(id) FROM media_resources.tb_album_audio WHERE STATUS = 2 AND album_id = #{albumId}  AND valid_startdate BETWEEN '2021-04-29 00:00:00' AND '2021-04-30 00:00:00' ")
 	Integer conutUpdateYes(Long albumId);
 
 	@Select("SELECT count(id) FROM media_resources.tb_album_audio WHERE STATUS = 2 AND album_id = #{albumId}")

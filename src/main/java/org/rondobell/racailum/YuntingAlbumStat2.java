@@ -24,6 +24,7 @@ public class YuntingAlbumStat2 {
                 int count = mapper.conutUpdateYes(albumId);
                 session.close();
 
+                //还要更新文本文件！！！
 
                 session = SqlSessionFactoryHolder.getSession();
                 mapper = session.getMapper(MzMapper.class);
