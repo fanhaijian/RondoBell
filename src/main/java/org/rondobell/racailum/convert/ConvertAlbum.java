@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ConvertTask implements Runnable{
+public class ConvertAlbum implements Runnable{
 
-	static Long startId = 1000025888678L;
+	static Long startId = 1000026296476L;
 
 	String server;
 	int id;
@@ -37,29 +37,52 @@ public class ConvertTask implements Runnable{
 
 	public static void main(String[] args) throws ParseException {
 
+		HttpClient httpClient = new HttpClient();
+
 
 		List<String> serverList = new ArrayList<>();
 		//serverList.add("http://10.51.151.117:8084,4");
-		serverList.add("http://10.51.151.119:8080,3");
+		serverList.add("http://10.51.151.119:8080,4");
 		//serverList.add("http://10.51.151.126:8081,4");
 		serverList.add("http://10.51.151.120:8081,4");
-		//serverList.add("http://10.51.151.135:8080,6");
-		//serverList.add("http://10.51.151.136:8080,4");
+		//serverList.add("http://10.51.151.135:8080,1");
+		//serverList.add("http://10.51.151.136:8080,1");
 
+		List<ConvertInfo> convertInfoList = new ArrayList<>();
 
-		for (String serverInfo:serverList){
+		SqlSession session = SqlSessionFactoryHolder.getSession();
+			MzMapper mapper = session.getMapper(MzMapper.class);
+			convertInfoList = mapper.queryAudioByAlbumId(1100000000924L);
+			session.close();
+			int i=1;
+			for(ConvertInfo info:convertInfoList){
+				System.out.println(info.getAudioId()+" "+info.getFilePath());
+				String server = serverList.get(i%2);
+				String result = httpClient.get(server+"/kaola-new-audioConvert/old/convert?" +
+						"audioId="+info.getAudioId()+"&catalogId="+info.getCatalogId()+"&filePath="+info.getFilePath());
+
+				i++;
+				try {
+					Thread.sleep(1000*30);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+			}
+
+		/*for (String serverInfo:serverList){
 			String server = serverInfo.split(",")[0];
 			int size = Integer.parseInt(serverInfo.split(",")[1]);
 
 			for (int i=0;i<size;i++) {
-				ConvertTask task = new ConvertTask();
+				ConvertAlbum task = new ConvertAlbum();
 				task.setServer(server);
 				task.setId(i);
 				new Thread(task).start();
 				//break;
 			}
 			//break;
-		}
+		}*/
 
 	}
 
@@ -72,7 +95,7 @@ public class ConvertTask implements Runnable{
 		SimpleDateFormat formator = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 		while (true) {
-			synchronized (ConvertTask.class){
+			synchronized (ConvertAlbum.class){
 				SqlSession session = SqlSessionFactoryHolder.getSession();
 				try {
 					MzMapper mapper = session.getMapper(MzMapper.class);
