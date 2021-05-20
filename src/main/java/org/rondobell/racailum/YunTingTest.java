@@ -21,7 +21,7 @@ public class YunTingTest {
 	public static void main(String[] args) throws IOException {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 
-		String albumId = "15796693296170";
+		String albumId = "16141468371910";
 		HttpPost httpPost = new HttpPost("http://esopendyn.radio.cn/appstk8k/dyn5105f815be0318f9/5f5c518bf9eaa940e2535a27671eaf2f");
 
 		long time = System.currentTimeMillis()/1000;

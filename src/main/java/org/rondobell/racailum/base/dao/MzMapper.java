@@ -30,11 +30,11 @@ public interface MzMapper {
 	@Select("select id from media_resources.tb_broadcast")
 	List<Long> queryBroadcastId();
 
-	@Update("update media_resources.tb_album_audio set status=5  where album_id in (1100002156626,1100002156629,1100002157059,1100002157076,1100002156973,1100002156738,1100002156742,1100002156773,1100002157011,1100002157015,1100002157019,1100002157022,1100002157024,1100002157033,1100002157161,1100002157162,1100002157080,1100002157085,1100002157087,1100002157094,1100002157095,1100002157096,1100002157098,1100002157099,1100002157125,1100002156789,1100002156790,1100002156791,1100002156825,1100002156828,1100002156829) and (create_date = '2021-05-05 11:25:00' or create_date = '2021-05-08 11:25:00')")
+	@Update("update media_resources.tb_album set source=34,uploader_id=15798 where id=1100002161849")
     int simpleUpdate();
 
-	@Update(" from media_resources.tb_album_application_scope where album_id in (1100002156670,1100002156671,1100002156675,1100002156676,1100002156678,1100002156683)")
-	void simpleUpdate2();
+	@Update("update media_resources.tb_album set status=0 where id = #{id}")
+	Integer simpleUpdate2(Long id);
 
 	@Select("SELECT count(id) FROM media_resources.tb_album_audio WHERE STATUS = 2 AND album_id = #{albumId}  AND valid_startdate BETWEEN '2021-04-29 00:00:00' AND '2021-04-30 00:00:00' ")
 	Integer conutUpdateYes(Long albumId);
@@ -50,4 +50,10 @@ public interface MzMapper {
 
 	@Select("select id as audioId, catalog_id catalogId, file_path filePath from media_resources.tb_album_audio where status=2 and id> 1000001045508 and album_id = #{l}")
     List<ConvertInfo> queryAudioByAlbumId(Long l);
+
+	@Select("SELECT id,name FROM media_resources.tb_label WHERE id in (select label_id from media_resources.lk_label_catalog where catalog_id = #{id})")
+	List<Map<String, Object>> queryLabelByCatalogId(Integer id);
+
+	@Select("SELECT name FROM media_resources.tb_label_value WHERE label_id=#{id}")
+	List<String> queryValueByLabelId(Integer id);
 }
