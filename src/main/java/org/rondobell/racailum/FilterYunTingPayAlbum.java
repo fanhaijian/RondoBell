@@ -1,7 +1,6 @@
 package org.rondobell.racailum;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,33 +17,39 @@ public class FilterYunTingPayAlbum {
         List<String> list7 = new ArrayList<>();
 
 
-        FileReader fileReader = new FileReader("FilterYunTingPayAlbum专辑数据 (5.7).csv");
+        FileReader fileReader = new FileReader("C:\\Users\\fanhj\\Desktop\\专辑数据 (5.7).csv");
         BufferedReader in = new BufferedReader(fileReader);
         String str;
         while ((str = in.readLine()) != null) {
             String[] infos = str.split(",");
-            if("是".equals(infos[3])||"是".equals(infos[4])){
+            if("是".equals(infos[6])){
                 //list.add(infos[0]+"\t"+infos[1]);
                 listId.add(infos[0]);
+            //System.out.println(infos[0]+"。");
             }
         }
         fileReader.close();
         in.close();
 
-        fileReader = new FileReader("C:\\Users\\fanhj\\Desktop\\newgrab\\yunting_album.txt");
+        System.out.println("size  "+listId.size());
+
+        fileReader = new FileReader("C:\\Users\\fanhj\\Desktop\\newgrab\\tmp.txt");
         in = new BufferedReader(fileReader);
         while ((str = in.readLine()) != null) {
-            String[] infos = str.split("\t");
-            if(listId.contains(infos[1])){
-                list.add(str);
+            //String[] infos = str.split("\t");
+            str = str.trim();
+            //System.out.println(str+"。。");
+            if(listId.contains(str)){
+                //list.add(str);
+                System.out.println(str);
             }else{
-                listNew.add(str);
+                //listNew.add(str);
             }
         }
         fileReader.close();
         in.close();
 
-
+        /*
         fileReader = new FileReader("C:\\Users\\fanhj\\Desktop\\newgrab\\yunting_album_finish.txt");
         in = new BufferedReader(fileReader);
         while ((str = in.readLine()) != null) {
@@ -88,7 +93,7 @@ public class FilterYunTingPayAlbum {
 
         for(String line:list7){
             System.out.println(line);
-        }
+        }*/
     }
 
 

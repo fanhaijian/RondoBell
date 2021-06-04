@@ -17,11 +17,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class YunTingTest {
+public class YunTingGrabTest {
 	public static void main(String[] args) throws IOException {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 
-		String albumId = "16141468371910";
+		String albumId = "16225189552170";
 		HttpPost httpPost = new HttpPost("http://esopendyn.radio.cn/appstk8k/dyn5105f815be0318f9/5f5c518bf9eaa940e2535a27671eaf2f");
 
 		long time = System.currentTimeMillis()/1000;
@@ -40,11 +40,13 @@ public class YunTingTest {
 		CloseableHttpResponse response = httpClient.execute(httpPost);
 
 		String result = EntityUtils.toString(response.getEntity(), "UTF-8");
+		response.close();
 		System.out.println(result);
+		/*System.out.println(result);
 		JSONObject json = JSON.parseObject(result);
 		JSONArray conArray = json.getJSONArray("con");
 		String img = conArray.getJSONObject(0).getString("img");
-		System.out.println(img);
+		System.out.println(img);*/
 
 	}
 }

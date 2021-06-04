@@ -1,5 +1,6 @@
 package org.rondobell.racailum.base.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -30,7 +31,7 @@ public interface MzMapper {
 	@Select("select id from media_resources.tb_broadcast")
 	List<Long> queryBroadcastId();
 
-	@Update("update media_resources.tb_album set source=34,uploader_id=15798 where id=1100002161849")
+	@Update("update media_resources.tb_album set source=34,uploader_id=15798 where id in (1100002161878)")
     int simpleUpdate();
 
 	@Update("update media_resources.tb_album set status=0 where id = #{id}")
@@ -56,4 +57,16 @@ public interface MzMapper {
 
 	@Select("SELECT name FROM media_resources.tb_label_value WHERE label_id=#{id}")
 	List<String> queryValueByLabelId(Integer id);
+
+	@Delete("update media_resources.tb_album_audio set status = 5 where id=#{id}")
+	int deleteAudio(Long id);
+
+	@Update("update user.open_install set car_type=#{carType} where device_id=#{deviceId}")
+	int updateCarType(@Param("carType") String carType, @Param("deviceId") String deviceId);
+
+	@Update("update media_resources.tb_album_audio set number = number-5 where number>50 and album_id=1100002156581 and id not in (1000026630749,1000026630750,1000026630751,1000026630752,1000026630753)")
+	int updateNumber();
+
+	@Select("select id from media_resources.tb_album WHERE SOURCE = 34 and status = 1")
+	List<Long> queryYunIds();
 }

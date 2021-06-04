@@ -15,25 +15,25 @@ public class CountYunTingAudioCount {
         Map<String,String> map = new HashMap<>();
 
 
-        FileReader fileReader = new FileReader("C:\\Users\\fanhj\\Desktop\\专辑数据 (5.7).csv");
+        FileReader fileReader = new FileReader("C:\\Users\\fanhj\\Desktop\\newgrab\\pay2原始out.txt");
         BufferedReader in = new BufferedReader(fileReader);
         String str;
         while ((str = in.readLine()) != null) {
-            String[] infos = str.split(",");
-                //list.add(infos[0]+"\t"+infos[1]);
-              map.put(infos[0], infos[5]);
+            String[] infos = str.split("\t");
+            list.add(infos[0]);
 
         }
         fileReader.close();
         in.close();
 
         int sum = 0;
-        fileReader = new FileReader("C:\\Users\\fanhj\\Desktop\\newgrab\\yunting_album_finish_filter_use.txt");
+        fileReader = new FileReader("D:\\project\\kaola-server\\kaola-job\\src\\main\\resources\\yunting_album.txt");
         in = new BufferedReader(fileReader);
         while ((str = in.readLine()) != null) {
             String[] infos = str.split("\t");
-            String count = map.get(infos[1]);
-            sum+=Integer.valueOf(count);
+            if(list.contains(infos[0])){
+                System.out.println(infos[0]);
+            }
 
         }
         fileReader.close();
