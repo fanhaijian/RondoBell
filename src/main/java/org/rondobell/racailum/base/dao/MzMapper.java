@@ -1,10 +1,8 @@
 package org.rondobell.racailum.base.dao;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.rondobell.racailum.base.dto.BroadcastAdditionDto;
+import org.rondobell.racailum.base.dto.BroadcastStream;
 import org.rondobell.racailum.base.dto.ConvertInfo;
 
 import java.util.Date;
@@ -69,4 +67,17 @@ public interface MzMapper {
 
 	@Select("select id from media_resources.tb_album WHERE SOURCE = 34 and status = 1")
 	List<Long> queryYunIds();
+
+	@Select("select appid from user.open_install where device_id=#{da}")
+	String getAppId(String da);
+
+	@Select("select id,broadcast_id,stream,status from media_resources.tb_broadcast_stream where broadcast_id = #{id}")
+    List<BroadcastStream> queryStream(String id);
+
+	@Update("update media_resources.tb_broadcast_stream set status = 1 where id = #{id}")
+	void updateStream(Integer id);
+
+	@Insert("insert into media_resources.tb_broadcast_stream (broadcast_id,stream,status,current_use,createby,creater_name,create_date) values " +
+			"(#{bid}, #{stream}, #{status}, #{use}, #{by}, #{name}, #{date})")
+	void insetStream(@Param("bid") String bid, @Param("stream") String stream, @Param("status") int status, @Param("use") int use, @Param("by") int by, @Param("name") String name, @Param("date") Date date);
 }

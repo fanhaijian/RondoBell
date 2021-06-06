@@ -20,23 +20,19 @@ import org.rondobell.racailum.base.dao.SqlSessionFactoryHolder;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class YunTingFilterPay {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		CloseableHttpResponse response = null;
 		Map<String, String> map = new HashMap<>();
-		FileReader fileReader = new FileReader("D:\\project\\kaola-server\\kaola-job\\src\\main\\resources\\yunting_album_finish.txt");
+		Set<String> list = new HashSet<>();
+		FileReader fileReader = new FileReader("C:\\Users\\fanhj\\Downloads\\da_id.txt");
 		BufferedReader in = new BufferedReader(fileReader);
 		String line;
 		while ((line = in.readLine()) != null) {
-			String[] infos = line.split("\t");
-			//list.add(infos[0]+"\t"+infos[1]);
-			map.put(infos[0], infos[1]);
+			String da = line.trim();
 
 		}
 		fileReader.close();

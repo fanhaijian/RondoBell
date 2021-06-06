@@ -15,7 +15,7 @@ public class CountYunTingAudioCount {
         Map<String,String> map = new HashMap<>();
 
 
-        FileReader fileReader = new FileReader("C:\\Users\\fanhj\\Desktop\\newgrab\\pay2原始out.txt");
+        FileReader fileReader = new FileReader("C:\\Users\\fanhj\\Downloads\\pay2原始out.txt");
         BufferedReader in = new BufferedReader(fileReader);
         String str;
         while ((str = in.readLine()) != null) {
