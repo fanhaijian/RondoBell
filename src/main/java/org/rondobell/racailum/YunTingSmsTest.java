@@ -11,30 +11,34 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.rondobell.racailum.base.http.FakeSSLClient;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class YunTingUserTest {
+public class YunTingSmsTest {
 	public static void main(String[] args) throws Exception {
-		CloseableHttpClient httpClient = HttpClients.createDefault();
-		//CloseableHttpClient httpClient = new FakeSSLClient();
+		//CloseableHttpClient httpClient = HttpClients.createDefault();
+		CloseableHttpClient httpClient = new FakeSSLClient();
 
 
-		String act = "cjlogin";
-		HttpPost httpPost = new HttpPost("http://yuntingoltest.radio.cn/ytsrv/srv/twoCode/getUrl");
-		//HttpPost httpPost = new HttpPost("http://ytapi.radio.cn/ytsrv/srv/twoCode/getUrl");
+		String mobilNumber = "13488863669";
+		String businessType = "1014";
+		//HttpPost httpPost = new HttpPost("http://yuntingoltest.radio.cn/ytsrv/srv/twoCode/getUrl");
+		HttpPost httpPost = new HttpPost("https://ytapi.radio.cn/smsGateway/sms/sendVerificationCode");
 
 
-		long time = System.currentTimeMillis()/1000;
-		String str = "act="+act+"&timetemp="+time+"&key=Uhy6CImFOwftDbvpI6TwW58wfExkcIqTmD7tB4s5sRm5vszv4GYNHTzyby4YRVl1";
-		String sign = DigestUtils.md5Hex(str).toUpperCase();
+		//long time = System.currentTimeMillis()/1000;
+		//String str = "mobilNumber="+act+"&timetemp="+time+"&key=Uhy6CImFOwftDbvpI6TwW58wfExkcIqTmD7tB4s5sRm5vszv4GYNHTzyby4YRVl1";
+		//String sign = DigestUtils.md5Hex(str).toUpperCase();
 		//System.out.println(sign);
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("act", act));
-		params.add(new BasicNameValuePair("timetemp", time+""));
-		params.add(new BasicNameValuePair("sign", sign));
-		System.out.println("act="+act+"&timetemp="+time+"&sign="+sign);
+		params.add(new BasicNameValuePair("mobilNumber", mobilNumber));
+		params.add(new BasicNameValuePair("businessType", businessType));
+		params.add(new BasicNameValuePair("params", ""));
+		params.add(new BasicNameValuePair("plantName", "CCYT"));
+
+		//params.add(new BasicNameValuePair("timetemp", time+""));
+		//params.add(new BasicNameValuePair("sign", sign));
+		//System.out.println("act="+act+"&timetemp="+time+"&sign="+sign);
 
 		httpPost.setEntity(new UrlEncodedFormEntity(params));
 		httpPost.addHeader("equipmentSource", "WEB");

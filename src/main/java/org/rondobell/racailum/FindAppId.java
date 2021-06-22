@@ -17,7 +17,8 @@ public class FindAppId {
     public static void main(String[] args) throws Exception {
         SqlSession session = null;
         Set<String> list = new HashSet<>();
-        FileReader fileReader = new FileReader("C:\\Users\\fanhj\\Downloads\\da_id.txt");
+        //FileReader fileReader = new FileReader("C:\\Users\\fanhj\\Downloads\\da_id.txt");
+        FileReader fileReader = new FileReader("D:\\yunting.txt");
         BufferedReader in = new BufferedReader(fileReader);
         String line;
         int em = 0;

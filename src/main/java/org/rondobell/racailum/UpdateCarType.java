@@ -41,6 +41,14 @@ public class UpdateCarType {
                         num++;
                         continue;
                     }
+                    if("null".equalsIgnoreCase(carType.trim())){
+                        num++;
+                        continue;
+                    }
+                    if(carType.length()>99){
+                        num++;
+                        continue;
+                    }
                     session = SqlSessionFactoryHolder.getSession();
                     MzMapper mapper = session.getMapper(MzMapper.class);
                     int count = mapper.updateCarType(carType, deviceId);

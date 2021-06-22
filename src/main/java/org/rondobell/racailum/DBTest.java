@@ -22,7 +22,7 @@ public class DBTest {
         session = SqlSessionFactoryHolder.getSession();
         MzMapper mapper = session.getMapper(MzMapper.class);
 
-        int count = mapper.simpleUpdate();
+        int count = mapper.updateSource();
         //System.out.println("update count "+count);
         session.close();
         //Thread.sleep(1111);

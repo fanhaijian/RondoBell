@@ -29,8 +29,8 @@ public interface MzMapper {
 	@Select("select id from media_resources.tb_broadcast")
 	List<Long> queryBroadcastId();
 
-	@Update("update media_resources.tb_album set source=34,uploader_id=15798 where id in (1100002161878)")
-    int simpleUpdate();
+	@Update("update media_resources.tb_album set source=34,uploader_id=15798 where id in (1100002161901,1100002161902,1100002161903)")
+    int updateSource();
 
 	@Update("update media_resources.tb_album set status=0 where id = #{id}")
 	Integer simpleUpdate2(Long id);

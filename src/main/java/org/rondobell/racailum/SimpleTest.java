@@ -15,5 +15,8 @@ public class SimpleTest {
 		Calendar cal = Calendar.getInstance();
 		cal.set(2021,3,23,14,10,0);
 		System.out.println(cal.getTime());
+
+		String uid = "1234567890";
+		System.out.println(uid.substring(uid.length()-4));
 	}
 }
