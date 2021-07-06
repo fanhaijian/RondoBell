@@ -29,7 +29,7 @@ public interface MzMapper {
 	@Select("select id from media_resources.tb_broadcast")
 	List<Long> queryBroadcastId();
 
-	@Update("update media_resources.tb_album set source=34,uploader_id=15798 where id in (1100002161901,1100002161902,1100002161903)")
+	@Update("update media_resources.tb_album set source=34,uploader_id=15798 where id in (1100002161933,1100002161934,1100002161935,1100002161936)")
     int updateSource();
 
 	@Update("update media_resources.tb_album set status=0 where id = #{id}")
@@ -80,4 +80,14 @@ public interface MzMapper {
 	@Insert("insert into media_resources.tb_broadcast_stream (broadcast_id,stream,status,current_use,createby,creater_name,create_date) values " +
 			"(#{bid}, #{stream}, #{status}, #{use}, #{by}, #{name}, #{date})")
 	void insetStream(@Param("bid") String bid, @Param("stream") String stream, @Param("status") int status, @Param("use") int use, @Param("by") int by, @Param("name") String name, @Param("date") Date date);
+
+	@Select("select id from media_resources.tb_album where status =1 and source <> 34 and catalog_id in (" +
+			"116,117,118,119,120,121,122,123,124,125,126,127,128,140,141,142,143,144,145,146,147,148,149,150,151) order by id")
+	List<Long> queryToDelAlbum();
+
+	@Update("update media_resources.tb_album set status = 0 where id=#{albumId}")
+	void delAlbum(Long albumId);
+
+	@Update("update media_resources.tb_album_audio set status = 0 where status =2 and album_id =#{albumId}")
+	void delAlbumAllAudio(Long albumId);
 }

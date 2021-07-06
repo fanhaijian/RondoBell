@@ -5,18 +5,24 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class SimpleTest {
+	private static final String DOMAIN="http://yuntinglive.radio.cn";
 	public static void main(String[] args) {
-//		String url = "https://m.kaolafm.com:87/location/serv";
-//		if(url.startsWith("https")){
-//			url = url.substring("https://".length());
-//			url = "http://"+ url.replaceFirst(":[1-9]+[0-9]*/|/",":443/");
-//		}
-//		System.out.println(url);
-		Calendar cal = Calendar.getInstance();
-		cal.set(2021,3,23,14,10,0);
-		System.out.println(cal.getTime());
+		String url = "http://yuntinglive.radio.cn/186/radios/10370/index_10370.m3u8?type=1";
+		url = url.substring(DOMAIN.length(), url.indexOf("?"));
+		System.out.println(url);
 
-		String uid = "1234567890";
-		System.out.println(uid.substring(uid.length()-4));
+		//System.out.println(Stream2Sign.addSign("http://yuntingbcast.radio.cn/80/radios/10300/index_10300.m3u8?type=1"));
+		System.out.println(getPath("http://image.kaolafm.net/mz/audios/202105/6bb04bf2-ad38-428e-a63e-a6c58735e6fe.mp3"));
+	}
+
+	public static String getPath(String url) {
+		String[] paths = url.split("/");
+		StringBuffer path = new StringBuffer();
+		if (paths.length > 3) {
+			for (int i = 3; i < paths.length; i++) {
+				path.append("/").append(paths[i]);
+			}
+		}
+		return path.toString();
 	}
 }

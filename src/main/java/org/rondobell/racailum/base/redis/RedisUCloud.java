@@ -10,6 +10,7 @@ import redis.clients.jedis.*;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.zip.CheckedOutputStream;
 
 public class RedisUCloud {
 
@@ -164,28 +165,39 @@ public class RedisUCloud {
 			ScanParams params = new ScanParams();
 			params.match(prefix);
 			params.count(50);
-			ScanResult<String> result = jedis.scan("0", params);
-			String cursor = "";
-			boolean finished = false;
-			int count = 1;
-			while (!finished) {
-				List<String> list = result.getResult();
-				if (list == null || list.isEmpty()) {
-					finished = true;
-				}
+			String cursor = "0";
+			int count = 0;
+			int all = 0;
 
-				for (String s : list) {
-					System.out.println(count + ") " + s);
-					count++;
-				}
+			while (true) {
+				ScanResult<String> scanResult = jedis.scan(cursor, params);
+				cursor = scanResult.getCursor();// 返回0 说明遍历完成
+				List<String> keys = scanResult.getResult();
+				for(int m = 0;m < keys.size();m++){
+					String key = keys.get(m);
+					//System.out.println(key);
+					Long ttl = jedis.ttl(key);
+					if(ttl == -1){
+						count++;
+						System.out.println("del: "+jedis.del(key));
+					}else if(ttl<60*60*24*5){
+						count++;
+						System.out.println("del: "+jedis.del(key));
+					}else{
+						all++;
+						//System.out.println("exp: "+ttl);
+					}
 
-				cursor = result.getCursor();
-				if (cursor.equalsIgnoreCase("0")) {
-					finished = true;
 				}
-				result = jedis.scan(cursor, params);
-
+				if ("0".equals(cursor)){
+					break;
+				}
+				count++;
+				if(count>20){
+					//break;
+				}
 			}
+			System.out.println(all);
 
 			System.out.println(count);
 
@@ -195,6 +207,7 @@ public class RedisUCloud {
 			release(jedis);
 		}
 	}
+
 
 	private <T> Schema<T> getSchema(Class<T> cls) {
 		Schema<T> schema = (Schema<T>) cachedSchema.get(cls);
